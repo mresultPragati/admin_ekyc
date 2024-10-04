@@ -113,8 +113,8 @@ export const KycRequest = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setRequestData(data);
-    // getSummaryList();
+    // setRequestData(data);
+    getSummaryList();
   }, []);
 
   const getSummaryList = async () => {
