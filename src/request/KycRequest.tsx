@@ -11,10 +11,10 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { getAllRequests } from "../api/ApiServices";
+import { getAllRequests, getDataByRequestId } from "../api/ApiServices";
 import CircleLoader from "../reusableComponet/loader/CircleLoader";
 import { statusColors, StatusTag } from "./SummaryStyled";
-import { createdDate } from "./constants";
+import { allStatus, createdDate } from "./constants";
 import { RequestDialog } from "./requsrDialog/RequestDialog";
 import PaginationElement from "../reusableComponet/pagination/PaginationElement";
 
@@ -123,15 +123,15 @@ export const KycRequest = () => {
     console.log("getLsit", summaryList);
     if (summaryList) {
       setShowLoader(false);
-      setRequestData(data);
+      setRequestData(summaryList);
     } else {
       setShowLoader(false);
     }
   };
 
-  const handleRequestedData = (item: any) => {
-    setSelectedRequest({ isDialogOpen: true, item: item });
-    // setOpen(true);
+  const handleRequestedData = async (reqId: string) => {
+    const resp = await getDataByRequestId(reqId);
+    if (resp) setSelectedRequest({ isDialogOpen: true, item: resp });
   };
 
   return (
@@ -188,16 +188,16 @@ export const KycRequest = () => {
                             <StatusTag
                               status={statusColors?.verificationPending}
                             >
-                              Verification pending{" "}
+                              {allStatus?.verificationPending}
                             </StatusTag>
                           ) : (
                             <StatusTag status={statusColors?.reviewPending}>
-                              Verification pending{" "}
+                              {allStatus?.reviewPending}
                             </StatusTag>
                           )}
                         </TableCell>
                         <TableCell>
-                          <Button onClick={() => handleRequestedData(item)}>
+                          <Button onClick={() => handleRequestedData(item?.id)}>
                             Review
                           </Button>
                         </TableCell>

@@ -9,3 +9,8 @@ export const createdDate = (timestamp: string) => {
   });
   return formattedDate;
 };
+
+export const allStatus = {
+  verificationPending: "Verification pending",
+  reviewPending: "Review pending",
+};
