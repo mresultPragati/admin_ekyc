@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { sendStatusRequest } from "../../api/ApiServices";
+import { getDataByRequestId, sendStatusRequest } from "../../api/ApiServices";
 import { AlertMessage } from "../../reusableComponet/ALertMessage";
 import { allStatus } from "../constants";
 
@@ -25,8 +25,8 @@ export const RequestDialog = ({
   data,
   setSelectedRequest,
 }: // open,
-// setOpen,
-any) => {
+  // setOpen,
+  any) => {
   const [alertMsg, setAlertMsg] = useState({
     msg: "",
     severity: "",
@@ -37,10 +37,11 @@ any) => {
     // setOpen(false);
   };
 
-  const manageRequest = (status: string) => {
+  const manageRequest = async (status: string) => {
     const resp: any = sendStatusRequest(data?.item?.id, status);
     console.log("RESP", resp);
     if (resp) {
+      await getDataByRequestId(data?.item?.id)
       setAlertMsg({
         msg: "Status changed successfully",
         severity: "success",
@@ -128,9 +129,14 @@ any) => {
                     <TableRow>
                       <TableCell>Status</TableCell>
                       <TableCell>
-                        {data?.item?.status === "requested"
-                          ? allStatus?.verificationPending
-                          : allStatus?.reviewPending}
+                        {
+                          data?.item?.status === "requested"
+                            ? allStatus?.verificationPending :
+                            data?.item?.status === "approved" ?
+                              allStatus.approved :
+                              data?.item?.status === "rejected" ?
+                                allStatus.rejected
+                                : allStatus?.reviewPending}
                       </TableCell>
                     </TableRow>
                     {/* <TableRow>

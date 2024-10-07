@@ -13,4 +13,6 @@ export const createdDate = (timestamp: string) => {
 export const allStatus = {
   verificationPending: "Verification pending",
   reviewPending: "Review pending",
+  approved: "Approved",
+  rejected: "Rejected",
 };
