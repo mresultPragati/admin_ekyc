@@ -65,7 +65,7 @@ export const getDataByRequestId = async (req_id: string) => {
 export const sendStatusRequest = async (req_id: string, status: string) => {
   try {
     const response = await axiosInstance.post(
-      `/api/kyc/manage-approval/${req_id}?status=${status}`,
+      `/api/manage-approval/${req_id}?status=${status}`,
       {
         headers: {
           "Content-Type": "application/json",
