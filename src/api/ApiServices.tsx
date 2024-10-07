@@ -65,17 +65,9 @@ export const getDataByRequestId = async (req_id: string) => {
 export const sendStatusRequest = async (req_id: string, status: string) => {
   try {
     const response = await axiosInstance.post(
-      `/api/manage-approval/${req_id}?status=${status}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          // "Content-Type": contentType ? contentType : "application/json",
-          // Authorization:
-          //   "Basic QUNLMjQwOTI0MTcxODU1MTc5WkZERlFQSkJONTJIM1A6TzJXTEFKSzQzNjk2U05TQ1lYM1VXV0NGRklDU0VFMko=",
-        },
-      }
+      `/api/manage-approval/${req_id}?status=${status}`
     );
-    console.log("KYC Service Response", response);
+    // console.log("KYC Service Response", response);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
