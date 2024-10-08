@@ -56,8 +56,8 @@ export const KycRequest = () => {
     <>
       {showLoader && <CircleLoader />}
 
-      <Box sx={{ marginTop: 5, padding: 3 }}>
-        <Typography variant="h4" align="center" gutterBottom>
+      <Box sx={{ marginTop: 3, padding: 3 }}>
+        <Typography className="mb-5" variant="h4" align="center" gutterBottom>
           Request Summary
         </Typography>
 
@@ -92,6 +92,7 @@ export const KycRequest = () => {
               <TableBody>
                 {filteredData
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  ?.reverse()
                   ?.map((item: any, index: number) => (
                     <TableRow hover key={index}>
                       <TableCell>{page * rowsPerPage + index + 1}</TableCell>
@@ -121,10 +122,7 @@ export const KycRequest = () => {
                         )}
                       </TableCell>
                       <TableCell>
-                        <Button
-                          variant="outlined"
-                          onClick={() => handleRequestedData(item?.id)}
-                        >
+                        <Button onClick={() => handleRequestedData(item?.id)}>
                           Review
                         </Button>
                       </TableCell>
@@ -149,6 +147,7 @@ export const KycRequest = () => {
       <RequestDialog
         data={selectedRequest}
         setSelectedRequest={setSelectedRequest}
+        selectedRequest={selectedRequest}
       />
     </>
   );
