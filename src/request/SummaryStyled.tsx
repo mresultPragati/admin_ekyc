@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 // Define your colors
 export const statusColors: any = {
-  verificationPending: "#FFC107",
-  reviewPending: "#FF9800",
+  verificationPending: "#FF9800",
+  reviewPending: "#face01",
   kycPending: "#03A9F4",
   approved: "#4CAF50",
   rejected: "#F44336",

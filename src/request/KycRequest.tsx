@@ -15,7 +15,7 @@ import { Search, Clear } from "@mui/icons-material";
 import { getAllRequests, getDataByRequestId } from "../api/ApiServices";
 import CircleLoader from "../reusableComponet/loader/CircleLoader";
 import { statusColors, StatusTag } from "./SummaryStyled";
-import { allStatus, createdDate } from "./constants";
+import { allStatus, createdDate, sortByCreatedAt } from "./constants";
 import { RequestDialog } from "./requsrDialog/RequestDialog";
 import PaginationElement from "../reusableComponet/pagination/PaginationElement";
 import { SearchFilterKyc } from "./SearchFilterKyc";
@@ -41,7 +41,7 @@ export const KycRequest = () => {
     if (summaryList) {
       setShowLoader(false);
       setRequestData(summaryList);
-      setFilteredData(summaryList);
+      setFilteredData(sortByCreatedAt(summaryList));
     } else {
       setShowLoader(false);
     }
@@ -49,7 +49,11 @@ export const KycRequest = () => {
 
   const handleRequestedData = async (reqId: string) => {
     const resp = await getDataByRequestId(reqId);
-    if (resp) setSelectedRequest({ isDialogOpen: true, item: resp });
+    setShowLoader(true);
+    if (resp) {
+      setShowLoader(false);
+      setSelectedRequest({ isDialogOpen: true, item: resp });
+    }
   };
 
   return (
@@ -79,7 +83,7 @@ export const KycRequest = () => {
                     Customer Detail
                   </TableCell>
                   <TableCell sx={{ fontWeight: "bold" }} align="left">
-                    Created At
+                    Created On
                   </TableCell>
                   <TableCell sx={{ fontWeight: "bold" }} align="left">
                     Status
@@ -92,7 +96,6 @@ export const KycRequest = () => {
               <TableBody>
                 {filteredData
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  ?.reverse()
                   ?.map((item: any, index: number) => (
                     <TableRow hover key={index}>
                       <TableCell>{page * rowsPerPage + index + 1}</TableCell>
@@ -114,6 +117,14 @@ export const KycRequest = () => {
                         {item?.status === "requested" ? (
                           <StatusTag status={statusColors?.verificationPending}>
                             {allStatus?.verificationPending}
+                          </StatusTag>
+                        ) : item?.status === "approved" ? (
+                          <StatusTag status={statusColors?.approved}>
+                            {allStatus?.approved}
+                          </StatusTag>
+                        ) : item?.status === "approved" ? (
+                          <StatusTag status={statusColors?.rejected}>
+                            {allStatus?.rejected}
                           </StatusTag>
                         ) : (
                           <StatusTag status={statusColors?.reviewPending}>

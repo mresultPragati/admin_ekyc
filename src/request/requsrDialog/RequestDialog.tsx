@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogTitle,
   Grid,
@@ -25,9 +24,7 @@ export const RequestDialog = ({
   data,
   setSelectedRequest,
   selectedRequest,
-}: // open,
-// setOpen,
-any) => {
+}: any) => {
   const [alertMsg, setAlertMsg] = useState({
     msg: "",
     severity: "",
@@ -35,7 +32,6 @@ any) => {
 
   const handleClose = () => {
     setSelectedRequest({});
-    // setOpen(false);
   };
 
   const manageRequest = async (status: string) => {
@@ -50,7 +46,6 @@ any) => {
       });
     }
   };
-  console.log("data?.item", data);
 
   return (
     <>
@@ -96,11 +91,6 @@ any) => {
                       <TableCell>Customer Identifier</TableCell>
                       <TableCell>{data?.item?.customer_identifier}</TableCell>
                     </TableRow>
-
-                    {/* <TableRow>
-                    <TableCell>Auditor Remarks</TableCell>
-                    <TableCell>{data?.item?.auditorRemarks || "N/A"}</TableCell>
-                  </TableRow> */}
                   </TableBody>
                 </Table>
               </TableContainer>
@@ -140,22 +130,6 @@ any) => {
                           : allStatus?.reviewPending}
                       </TableCell>
                     </TableRow>
-                    {/* <TableRow>
-                    <TableCell>Requested Actions</TableCell>
-                    <TableCell>Digilocker x 1</TableCell>
-                  </TableRow> */}
-                    {/* <TableRow>
-                    <TableCell>Data Analysis By Digio</TableCell>
-                    <TableCell>Not Done</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Ids Found</TableCell>
-                    <TableCell>{data?.item?.idsFound || "N/A"}</TableCell>
-                  </TableRow> */}
-                    {/* <TableRow>
-                    <TableCell>Face Matches</TableCell>
-                    <TableCell>Matched: 0, Not Matched: 0</TableCell>
-                  </TableRow> */}
                   </TableBody>
                 </Table>
               </TableContainer>
@@ -165,23 +139,27 @@ any) => {
                   justifyContent: "flex-end",
                 }}
               >
-                <Button
-                  onClick={() => manageRequest("APPROVED")}
-                  // disabled={data?.item?.status === "requested"}
-                  variant="contained"
-                  className="mt-5 me-3"
-                >
-                  Approve
-                </Button>
-                <Button
-                  onClick={() => manageRequest("REJECTED")}
-                  // disabled={data?.item?.status === "requested"}
-                  variant="contained"
-                  color="error"
-                  className="mt-5"
-                >
-                  Reject
-                </Button>
+                <>
+                  <Button
+                    onClick={() => manageRequest("APPROVED")}
+                    // disabled={data?.item?.status === "requested"}
+                    variant="contained"
+                    className="mt-5 me-3"
+                    disabled={data?.item?.status !== "approval_pending"}
+                  >
+                    Approve
+                  </Button>
+                  <Button
+                    onClick={() => manageRequest("REJECTED")}
+                    // disabled={data?.item?.status === "requested"}
+                    variant="contained"
+                    color="error"
+                    className="mt-5"
+                    disabled={data?.item?.status !== "approval_pending"}
+                  >
+                    Reject
+                  </Button>
+                </>
               </Box>
             </Grid>
           </Grid>

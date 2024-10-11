@@ -6,6 +6,8 @@ export const createdDate = (timestamp: string) => {
     year: "numeric",
     month: "long",
     day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
   });
   return formattedDate;
 };
@@ -15,4 +17,12 @@ export const allStatus = {
   reviewPending: "Review pending",
   approved: "Approved",
   rejected: "Rejected",
+};
+
+export const sortByCreatedAt = (data: any[]) => {
+  return data.sort((a, b) => {
+    const dateA = new Date(a?.accessToken?.createdAt).getTime();
+    const dateB = new Date(b?.accessToken?.createdAt).getTime();
+    return dateB - dateA; // Sort in descending order
+  });
 };
