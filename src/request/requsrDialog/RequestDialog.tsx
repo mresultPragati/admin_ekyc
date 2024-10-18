@@ -104,14 +104,14 @@ export const RequestDialog = ({
                   <TableBody>
                     <TableRow>
                       <TableCell>
-                        {data?.item?.workflow_name === "AADHAR_VARIFICATION"
-                          ? "Aadhaar Number"
-                          : "Pan Number"}
+                        {data?.item?.workflow_name === "PAN_VERIFICATION"
+                          ? "Pan Number"
+                          : "Aadhaar Number"}
                       </TableCell>
                       <TableCell>
-                        {data?.item?.workflow_name === "AADHAR_VARIFICATION"
-                          ? data?.item?.request_details?.["aadhar number"]
-                          : data?.item?.request_details?.["PAN Number"]}
+                        {data?.item?.workflow_name === "PAN_VERIFICATION"
+                          ? data?.item?.request_details?.["PAN Number"]
+                          : data?.item?.request_details?.["aadhar number"]}
                       </TableCell>
                     </TableRow>
                     <TableRow>
