@@ -122,11 +122,11 @@ export const KycRequest = () => {
                           <StatusTag status={statusColors?.verificationPending}>
                             {allStatus?.verificationPending}
                           </StatusTag>
-                        ) : item?.status === "approved" ? (
+                        ) : item?.status === "Approved" ? (
                           <StatusTag status={statusColors?.approved}>
                             {allStatus?.approved}
                           </StatusTag>
-                        ) : item?.status === "approved" ? (
+                        ) : item?.status === "Rejected" ? (
                           <StatusTag status={statusColors?.rejected}>
                             {allStatus?.rejected}
                           </StatusTag>
