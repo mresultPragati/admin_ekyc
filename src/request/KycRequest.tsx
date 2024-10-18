@@ -116,7 +116,9 @@ export const KycRequest = () => {
                       <TableCell>
                         {createdDate(item?.accessToken?.createdAt)}
                       </TableCell>
-                      <TableCell>{item?.accessToken?.workflow_name}</TableCell>
+                      <TableCell>
+                        {item?.workflowName}
+                      </TableCell>
                       <TableCell>
                         {item?.status === "requested" ? (
                           <StatusTag status={statusColors?.verificationPending}>
