@@ -17,16 +17,6 @@ export const getAllRequests = async () => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("eRRROR KYC Submission Failed:", error.message);
-      if (error.response) {
-        // Request made and server responded
-        console.log("eRRROR Response data:", error.response.data);
-        console.log("eRRROR Response status:", error.response.status);
-      } else if (error.request) {
-        // Request was made but no response received
-        console.log("eRRROR Request data:", error.request);
-      }
-    } else {
-      console.log("eRRROR Unexpected error:", error);
     }
     throw new Error(`KYC Submission Failed: ${error}`);
   }
@@ -47,16 +37,6 @@ export const getDataByRequestId = async (req_id: string) => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("eRRROR KYC Submission Failed:", error.message);
-      if (error.response) {
-        // Request made and server responded
-        console.log("eRRROR Response data:", error.response.data);
-        console.log("eRRROR Response status:", error.response.status);
-      } else if (error.request) {
-        // Request was made but no response received
-        console.log("eRRROR Request data:", error.request);
-      }
-    } else {
-      console.log("eRRROR Unexpected error:", error);
     }
     throw new Error(`KYC Submission Failed: ${error}`);
   }
@@ -72,16 +52,6 @@ export const sendStatusRequest = async (req_id: string, status: string) => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.log("eRRROR KYC Submission Failed:", error.message);
-      if (error.response) {
-        // Request made and server responded
-        console.log("eRRROR Response data:", error.response.data);
-        console.log("eRRROR Response status:", error.response.status);
-      } else if (error.request) {
-        // Request was made but no response received
-        console.log("eRRROR Request data:", error.request);
-      }
-    } else {
-      console.log("eRRROR Unexpected error:", error);
     }
     throw new Error(`KYC Submission Failed: ${error}`);
   }

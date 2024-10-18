@@ -86,6 +86,9 @@ export const KycRequest = () => {
                     Created On
                   </TableCell>
                   <TableCell sx={{ fontWeight: "bold" }} align="left">
+                    Workflow Name
+                  </TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }} align="left">
                     Status
                   </TableCell>
                   <TableCell sx={{ fontWeight: "bold" }} align="left">
@@ -113,6 +116,7 @@ export const KycRequest = () => {
                       <TableCell>
                         {createdDate(item?.accessToken?.createdAt)}
                       </TableCell>
+                      <TableCell>{item?.accessToken?.workflow_name}</TableCell>
                       <TableCell>
                         {item?.status === "requested" ? (
                           <StatusTag status={statusColors?.verificationPending}>
